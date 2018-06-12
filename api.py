@@ -4,7 +4,6 @@ from lxml import html
 url = "https://www.iliad.it/account/"
 
 dic = {
-
 	'chiamate_tot' : '//*[@id="page-container"]/div/div[2]/div[2]/div[1]/div[1]/div[1]/div/div[1]/span[1]/text()',
 	'gb_tot' : '//*[@id="page-container"]/div/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[1]/span[1]/text()',
 	'sms_tot' : '//*[@id="page-container"]/div/div[2]/div[2]/div[1]/div[1]/div[2]/div/div[1]/span[1]/text()',
@@ -13,6 +12,9 @@ dic = {
 	'credito_residuo' : '//*[@id="page-container"]/div/div[2]/div[2]/div[5]/div[4]/text()',
 }
 
+errors = {
+	'credentials': '//*[@id="page-container"]/div/div[1]/div/text()'
+}
 
 def login(id, pwd):
 	"""
@@ -34,7 +36,14 @@ def get_info(tree):
 	return: dic
 	"""
 	info = {}
+
+	for err_name, xpath in errors.items():
+		error = tree.xpath(xpath)
+		if error:
+			return {'ok':{}, 'error':err_name}
+
 	for k, v in dic.items():
-		info.update({k:tree.xpath(v)[0]})
+		res = tree.xpath(v)
+		info.update({k:res[0]})
+
 	return info
-	
