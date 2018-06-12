@@ -35,15 +35,16 @@ def get_info(tree):
 	params: TreeObject
 	return: dic
 	"""
-	info = {}
+	info = {'ok':{}, 'error':False}
 
 	for err_name, xpath in errors.items():
 		error = tree.xpath(xpath)
 		if error:
-			return {'ok':{}, 'error':err_name}
+			info['error'] = err_name
+			return info
 
 	for k, v in dic.items():
 		res = tree.xpath(v)
-		info.update({k:res[0]})
+		info['ok'].update({k:res[0]})
 
 	return info
