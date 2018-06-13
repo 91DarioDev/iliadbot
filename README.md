@@ -6,37 +6,32 @@ Potresti non fidarti che non salviamo le tue credenziali e voler eseguire una tu
 
 ## Run this bot by yourself:
 
-**Clone e install:**
+### On Linux:
+
+- Move to the path where you want to create the virtualenv directory
 ```
 cd path
-git clone https://github.com/91DarioDev/iliadbot
-cd iliadbot
-pip install .
 ```
-
-**Config the bot:**
-- open `iliadbot/config/config.example.yaml`
-- select all and copy
-- create a file `iliadbot/config/config.yaml`
-- paste and replace the values with real values
-- save and close
-
-**Run the bot:**
+- Create a folder containing the env named `tsbenv`
 ```
-iliadbot
+virtualenv -p python3 iliadbotenv 
 ```
-Note: _In case you want to call iliadbot from another path, you can, but you have to specify the path of the config.yaml file as first argument in the cli.
-Example:_
-
+- Install the bot from the zip
 ```
-iliadbot path/iliadbot/config/config.yaml
+iliadbotenv/bin/pip install https://github.com/91dariodev/iliadbot/archive/master.zip
 ```
-
-**Upgrade the bot:**
+- Run the bot. The first parameter of the command is the `config.yaml` file. Copy from the source `config.example.yaml` and create a file named `config.yaml` replacing values.
 ```
-cd path/iliadbot
-git pull https://github.com/91DarioDev/iliadbot
-pip install --upgrade .
+iliadbotenv/bin/iliadbot path/config.yaml
+```
+- To upgrade the bot:
+```
+iliadbotenv/bin/pip install --upgrade https://github.com/91dariodev/iliadbot/archive/master.zip
+```
+- To delete everything:
+```
+cd ..
+rm -rf iliadbotenv
 ```
 
 
