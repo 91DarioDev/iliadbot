@@ -20,14 +20,14 @@ import time
 import threading
 
 from telegram.ext.dispatcher import run_async
+from iliadbot import config
 
 
 LOCAL = threading.local()
-DB_PATH = "database/database.db"
 
 def conn():
     if not hasattr(LOCAL, "db"):
-        LOCAL.db = sqlite3.connect(DB_PATH)
+        LOCAL.db = sqlite3.connect(config.DB_PATH)
     return LOCAL.db
 
 

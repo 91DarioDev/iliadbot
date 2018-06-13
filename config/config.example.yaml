@@ -20,3 +20,6 @@
 
 # the token of the bot you get from t.me/botfather (type: str)
 bot_token: "token"
+
+# the path where the database will be saved
+db_path: "database/database.db"
