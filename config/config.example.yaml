@@ -22,4 +22,4 @@
 bot_token: "token"
 
 # the path where the database will be saved
-db_path: "database/database.db"
+db_path: "/home/iliadbot/database/database.db"
