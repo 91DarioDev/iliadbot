@@ -30,7 +30,8 @@ setuptools.setup(
 
     install_requires=[
         "requests==2.7.0",
-        "lxml==4.2.1"
+        "lxml==4.2.1",
+        "python-telegram-bot"
     ],
 
     packages=[
