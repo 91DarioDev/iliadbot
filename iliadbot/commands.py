@@ -1,5 +1,5 @@
-# iliadbot - A telegram bot for telegram public groups leaderboards
-# Copyright (C) 2018  Dario <dariomsn@hotmail.it> (github.com/91DarioDev)
+# iliadbot - A telegram bot to check your iliad's balance and quotas
+# Copyright (C) 2018  iliadbot authors: see AUTHORS file at the top-level directory of this repo
 #
 # iliadbot is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published
