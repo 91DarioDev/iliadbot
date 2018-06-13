@@ -17,8 +17,8 @@
 
 import logging
 
-import commands
-import config
+from iliadbot import commands
+from iliadbot import config
 
 from telegram.ext import (
     Updater,

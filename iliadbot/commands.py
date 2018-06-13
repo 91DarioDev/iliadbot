@@ -16,7 +16,7 @@
 
 
 import html
-import api
+from iliadbot import api
 
 def user_info_traffic_command(bot, update, args):
     if len(args) != 2:
