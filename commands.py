@@ -15,6 +15,7 @@
 # along with iliadbot.  If not, see <http://www.gnu.org/licenses/>.
 
 
+import html
 import api
 
 def user_info_traffic_command(bot, update, args):
@@ -38,10 +39,10 @@ def user_info_traffic_command(bot, update, args):
             msg += "\nNon c'è nulla da mostrare"
         else:
             for i in info['ok']:
-                msg += "\n — {}: {}".format(i, info['ok'][i])
+                msg += "\n — {}: {}".format(html.escape(i), html.escape(info['ok'][i]))
 
     else:  # invalid credentials
-        msg += "<b>ERRORE:</b> {}".format(info['error'])
+        msg += "<b>ERRORE:</b> {}".format(html.escape(info['error']))
 
     update.message.reply_html(msg)
 
