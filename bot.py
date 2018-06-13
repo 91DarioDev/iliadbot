@@ -1,3 +1,20 @@
+# iliadbot - A telegram bot for telegram public groups leaderboards
+# Copyright (C) 2018  Dario <dariomsn@hotmail.it> (github.com/91DarioDev)
+#
+# iliadbot is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# iliadbot is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with iliadbot.  If not, see <http://www.gnu.org/licenses/>.
+
+
 import logging
 
 import commands
@@ -35,6 +52,7 @@ def main():
     j = updater.job_queue
 
     # commands
+    dp.add_handler(CommandHandler(('start, help'), commands.help_command))
     dp.add_handler(CommandHandler('info', commands.user_info_traffic_command, pass_args=True))
 
     # handle errors
