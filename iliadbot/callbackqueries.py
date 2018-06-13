@@ -31,10 +31,9 @@ def callback_query(bot, update):
 def update_iliad(bot, query):
     id_iliad = query.data.split(":")[1]
     password_iliad = query.data.split(":")[2]
-    msg = commands.iliad_message_creation(id_iliad, password_iliad)
-    reply_markup = keyboards.update_iliad_data_kb(id_iliad, password_iliad)
+    msg, keyboard = commands.iliad_message_creation(id_iliad, password_iliad)
     try:
-        query.edit_message_text(text=msg, reply_markup=reply_markup, parse_mode='HTML')
+        query.edit_message_text(text=msg, reply_markup=keyboard, parse_mode='HTML')
     except TelegramError as e:
         if str(e) != "Message is not modified": print(e)
     query.answer("aggiornato! ✅")

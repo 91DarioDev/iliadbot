@@ -31,12 +31,12 @@ def iliad_message_creation(iliad_id, iliad_password):
         else:
             for i in info['ok']:
                 msg += "\n — {}: {}".format(html.escape(i), html.escape(info['ok'][i]))
-
+        keyboard = keyboards.update_iliad_data_kb(iliad_id, iliad_password)
     else:  # invalid credentials
         msg += "<b>ERRORE:</b> {}".format(html.escape(info['error']))
+        keyboard = None
+    return msg, keyboard
 
-    return msg
-    
 
 def user_info_traffic_command(bot, update, args):
     if len(args) != 2:
@@ -50,8 +50,8 @@ def user_info_traffic_command(bot, update, args):
         return
 
     iliad_id, iliad_password = args
-    msg = iliad_message_creation(iliad_id, iliad_password)
-    update.message.reply_html(msg, reply_markup=keyboards.update_iliad_data_kb(iliad_id, iliad_password))
+    msg, keyboard = iliad_message_creation(iliad_id, iliad_password)
+    update.message.reply_html(msg, reply_markup=keyboard)
 
 
 def help_command(bot, update):
