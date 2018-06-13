@@ -17,19 +17,10 @@
 
 import html
 from iliadbot import api
+from iliadbot import keyboards
 
-def user_info_traffic_command(bot, update, args):
-    if len(args) != 2:
-        msg = (
-            "Per utilizzare questo comando devi aggiungere id iliad come primo argomento e "
-            "password iliad come secondo argomento.\nEsempio:\n\n<code>{} mio_id_iliad "
-            "mia_password_iliad</code>"
-        )
-        msg = msg.format(update.message.text.split(" ")[0])
-        update.message.reply_html(msg)
-        return
 
-    iliad_id, iliad_password = args
+def iliad_message_creation(iliad_id, iliad_password):
     info = api.get_info(api.login(iliad_id, iliad_password))
 
     msg = ""
@@ -44,7 +35,23 @@ def user_info_traffic_command(bot, update, args):
     else:  # invalid credentials
         msg += "<b>ERRORE:</b> {}".format(html.escape(info['error']))
 
-    update.message.reply_html(msg)
+    return msg
+    
+
+def user_info_traffic_command(bot, update, args):
+    if len(args) != 2:
+        msg = (
+            "Per utilizzare questo comando devi aggiungere id iliad come primo argomento e "
+            "password iliad come secondo argomento.\nEsempio:\n\n<code>{} mio_id_iliad "
+            "mia_password_iliad</code>"
+        )
+        msg = msg.format(update.message.text.split(" ")[0])
+        update.message.reply_html(msg)
+        return
+
+    iliad_id, iliad_password = args
+    msg = iliad_message_creation(iliad_id, iliad_password)
+    update.message.reply_html(msg, reply_markup=keyboards.update_iliad_data_kb(iliad_id, iliad_password))
 
 
 def help_command(bot, update):
