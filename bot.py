@@ -32,7 +32,7 @@ def main():
     j = updater.job_queue
 
     # commands
-    dp.add_handler(CommandHandler('info', commands.user_info_traffic, pass_args=True))
+    dp.add_handler(CommandHandler('info', commands.user_info_traffic_command, pass_args=True))
 
     # handle errors
     dp.add_error_handler(error)
