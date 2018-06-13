@@ -44,3 +44,14 @@ def user_info_traffic_command(bot, update, args):
         msg += "<b>ERRORE:</b> {}".format(info['error'])
 
     update.message.reply_html(msg)
+
+
+def help_command(bot, update):
+    msg = (
+        "Questo bot permette di conoscere soglie e credito della tua SIM iliad. "
+        "Il bot *non è ufficiale* e *non conserva o salva le tue credenziali di accesso*.\n"
+        "Il [codice sorgente](https://github.com/91DarioDev/iliadbot) è rilasciato sotto licenza AGPL 3.0.\n\n"
+        "*COMANDI SUPPORTATI:*\n\n /info - permette di conoscere stato soglie e credito"
+        "\n/help - mostra un messaggio di aiuto"
+    )
+    update.message.reply_markdown(msg, disable_web_page_preview=True)

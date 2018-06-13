@@ -52,7 +52,7 @@ def main():
     j = updater.job_queue
 
     # commands
-    dp.add_handler(CommandHandler(('start, help'), commands.help_command))
+    dp.add_handler(CommandHandler(('start', 'help'), commands.help_command))
     dp.add_handler(CommandHandler('info', commands.user_info_traffic_command, pass_args=True))
 
     # handle errors
