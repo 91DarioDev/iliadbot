@@ -1,2 +1,3 @@
 /config/config.yaml
 *.pyc
+database/*.db

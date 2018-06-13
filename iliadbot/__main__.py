@@ -20,6 +20,7 @@ import logging
 from iliadbot import commands
 from iliadbot import config
 from iliadbot import callbackqueries
+from iliadbot import messages
 
 from telegram.ext import (
     Updater,
@@ -52,6 +53,9 @@ def main():
 
     # define jobs
     j = updater.job_queue
+
+    # messages
+    dp.add_handler(MessageHandler(Filters.all, messages.before_processing), -1)
 
     # commands
     dp.add_handler(CommandHandler(('start', 'help'), commands.help_command))
