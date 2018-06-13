@@ -1,5 +1,7 @@
 import logging
 
+import commands
+
 from telegram.ext import (
     Updater,
     CommandHandler,
