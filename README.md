@@ -12,7 +12,7 @@ Potresti non fidarti che non salviamo le tue credenziali e voler eseguire una tu
 ```
 cd path
 ```
-- Create a folder containing the env named `tsbenv`
+- Create a folder containing the env named `iliadbotenv`
 ```
 virtualenv -p python3 iliadbotenv 
 ```
