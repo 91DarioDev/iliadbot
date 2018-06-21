@@ -17,16 +17,18 @@
 
 import requests
 from lxml import html
+import re
+from iliadbot import emoji
 
 url = "https://www.iliad.it/account/"
 
 dic = {
-    'chiamate_tot' : '//*[@id="page-container"]/div/div[2]/div[2]/div[1]/div[1]/div[1]/div/div[1]/span[1]/text()',
-    'gb_tot' : '//*[@id="page-container"]/div/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[1]/span[1]/text()',
-    'sms_tot' : '//*[@id="page-container"]/div/div[2]/div[2]/div[1]/div[1]/div[2]/div/div[1]/span[1]/text()',
-    'mms_tot' : '//*[@id="page-container"]/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div[1]/span[1]/text()',
-    'consumo_tot' : '//*[@id="page-container"]/div/div[2]/div[2]/div[5]/div[2]/text()',
-    'credito_residuo' : '//*[@id="page-container"]/div/div[2]/div[2]/div[5]/div[4]/text()',
+    "{} chiamate".format(emoji.telephone) : "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[1]/div[1]/div/div[1]",
+    "{} sms".format(emoji.sms): "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[1]/div[2]/div/div[1]",
+    "{} internet".format(emoji.internet): "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]/div/div[1]",
+    "{} mms".format(emoji.mms): "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div[1]",
+    "{} consumo totale".format(emoji.money): "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[5]/div[2]",
+    "{} credito residuo".format(emoji.money): "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[5]/div[4]"
 }
 
 errors = {
@@ -63,5 +65,7 @@ def get_info(tree):
     for k, v in dic.items():
         res = tree.xpath(v)
         if res:
-          info['ok'].update({k:res[0]})
+            res_child_text = res[0].text_content()
+            res_child_text_no_spaces = re.sub(' +',' ', res_child_text)
+            info['ok'].update({k:res_child_text_no_spaces})
     return info
