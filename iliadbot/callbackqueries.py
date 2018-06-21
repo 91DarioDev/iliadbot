@@ -17,6 +17,7 @@
 
 from iliadbot import commands
 from iliadbot import keyboards
+from iliadbot import database
 
 from telegram.error import TelegramError
 
