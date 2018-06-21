@@ -54,7 +54,7 @@ def get_info(tree):
     params: TreeObject
     return: dic
     """
-    info = {'ok':{}, 'error':False}
+    info = {'ok':[], 'error':False}
 
     for err_name, xpath in errors.items():
         error = tree.xpath(xpath)
@@ -67,5 +67,5 @@ def get_info(tree):
         if res:
             res_child_text = res[0].text_content()
             res_child_text_no_spaces = re.sub(' +',' ', res_child_text)
-            info['ok'].update({k:res_child_text_no_spaces})
+            info['ok'].append([k, res_child_text_no_spaces])
     return info
