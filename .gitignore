@@ -1,3 +1,4 @@
 /config/config.yaml
 *.pyc
-database/*.db
+iliadbot.egg-info/
+*.db

@@ -30,7 +30,7 @@ def iliad_message_creation(iliad_id, iliad_password):
             msg += "\nNon c'è nulla da mostrare"
         else:
             for i in info['ok']:
-                msg += "\n — {}: {}".format(html.escape(i), html.escape(info['ok'][i]))
+                msg += "\n — {}: {}".format(html.escape(i[0]), html.escape(i[1]))
         keyboard = keyboards.update_iliad_data_kb(iliad_id, iliad_password)
     else:  # invalid credentials
         msg += "<b>ERRORE:</b> {}".format(html.escape(info['error']))
