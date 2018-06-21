@@ -23,6 +23,7 @@ from telegram.error import TelegramError
 
 def callback_query(bot, update):
     query = update.callback_query
+    database.add_user_db(query.from_user.id)  # update db last activity date
 
     if query.data.startswith("update_iliad"):
         update_iliad(bot, query)
