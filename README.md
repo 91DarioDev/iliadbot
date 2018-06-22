@@ -3,6 +3,9 @@
 iliadbot è un bot telegram che permette di conoscere soglie e credito della tua SIM iliad. Il bot non è ufficiale e non conserva o salva le tue credenziali di accesso. Il codice sorgente è rilasciato sotto licenza AGPL 3.0.
 
 Potresti non fidarti che non salviamo le tue credenziali e voler eseguire una tua istanza del bot. Di seguito le istruzioni per farlo.
+<p align="center">
+<img src="../master/resources/screenshots/example.jpg" width="250">
+</p>
 
 ## Run this bot by yourself:
 
