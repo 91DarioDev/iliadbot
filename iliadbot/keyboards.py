@@ -15,13 +15,21 @@
 # along with iliadbot.  If not, see <http://www.gnu.org/licenses/>.
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from iliadbot import emoji
 
 
-def update_iliad_data_kb(iliad_id, iliad_password):
-    update_button = InlineKeyboardButton(
-        text="Aggiorna 🔄",
-        callback_data="update_iliad:{}:{}".format(iliad_id, iliad_password)
-    )
-    buttons_list = [[update_button]]
+def update_iliad_data_kb(iliad_id, iliad_password, info):
+    buttons = {
+        'italia': '{} Soglie Italia'.format(emoji.italy),
+        'estero': '{} Soglie Estero'.format(emoji.earth),
+    }
+    buttons_list = []
+    for i in buttons:
+        buttons_list.append([
+            InlineKeyboardButton(
+                text=buttons[i],
+                callback_data="update_iliad:{}:{}:{}".format(iliad_id, iliad_password, i)
+            )
+        ])
     keyboard = InlineKeyboardMarkup(buttons_list)
     return keyboard

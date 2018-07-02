@@ -20,8 +20,8 @@ from iliadbot import api
 from iliadbot import keyboards
 
 
-def iliad_message_creation(iliad_id, iliad_password):
-    info = api.get_info(api.login(iliad_id, iliad_password))
+def iliad_message_creation(iliad_id, iliad_password, which_dict='estero'):
+    info = api.get_info(api.login(iliad_id, iliad_password), which_dict)
 
     msg = ""
     if info['error'] is False:
@@ -31,7 +31,7 @@ def iliad_message_creation(iliad_id, iliad_password):
         else:
             for i in info['ok']:
                 msg += "\n — {}: {}".format(html.escape(i[0]), html.escape(i[1]))
-        keyboard = keyboards.update_iliad_data_kb(iliad_id, iliad_password)
+        keyboard = keyboards.update_iliad_data_kb(iliad_id, iliad_password, which_dict)
     else:  # invalid credentials
         msg += "<b>ERRORE:</b> {}".format(html.escape(info['error']))
         keyboard = None

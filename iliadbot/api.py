@@ -24,15 +24,28 @@ from iliadbot import emoji
 
 url = "https://www.iliad.it/account/"
 
-dic = collections.OrderedDict()
-dic["{} chiamate".format(emoji.telephone)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[1]/div/div[1]"
-dic["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div[1]"
-dic["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[1]"
-dic["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[2]/div/div[1]"
-dic["{} consumo totale".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[2]"
-dic["{} credito residuo".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[4]"
-dic["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]"
+# italia xpaths
+dic_italia = collections.OrderedDict()
+dic_italia["{} chiamate".format(emoji.telephone)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[1]/div/div[1]"
+dic_italia["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div[1]"
+dic_italia["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[1]"
+dic_italia["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[2]/div/div[1]"
 
+# estero xpaths
+dic_estero = collections.OrderedDict()
+dic_estero["{} chiamate".format(emoji.telephone)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[1]/div[1]/div/div[1]"
+dic_estero["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[1]/div[2]/div/div[1]"
+dic_estero["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div[1]"
+dic_estero["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div[1]"
+
+# info sim xpaths
+dic_general_info = collections.OrderedDict()
+dic_general_info["{} consumo totale".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[2]"
+dic_general_info["{} credito residuo".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[4]"
+dic_general_info["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]"
+
+
+# error xpaths
 errors = {
     'credentials': '//*[@id="page-container"]/div/div[1]/div/text()'
 }
@@ -49,7 +62,7 @@ def login(id, pwd):
 
     return tree
 
-def get_info(tree):
+def get_info(tree, which_dic):
     """
     Parse iliad info from tree object of the html profile page
     
@@ -64,10 +77,19 @@ def get_info(tree):
             info['error'] = err_name
             return info
 
+    # which_dic to take
+    if which_dic == 'italia':
+        dic = dic_italia
+    elif which_dic == 'estero':
+        dic = dic_estero
+
+    dic.update(dic_general_info)  # add general info to the chosen dict
     for k, v in dic.items():
         res = tree.xpath(v)
         if res:
             res_child_text = res[0].text_content()
-            res_child_text_no_spaces = re.sub(' +',' ', res_child_text)
+            res_child_text_no_spaces = re.sub(' +',' ', res_child_text)  # remove multiple spaces
+            res_child_text_no_spaces = re.sub(' \n',' ', res_child_text_no_spaces)  # remove multiple new lines
+            res_child_text_no_spaces = re.sub(' \t',' ', res_child_text_no_spaces) # remove multiple tabs
             info['ok'].append([k, res_child_text_no_spaces])
     return info

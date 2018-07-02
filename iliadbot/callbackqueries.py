@@ -33,7 +33,11 @@ def callback_query(bot, update):
 def update_iliad(bot, query):
     id_iliad = query.data.split(":")[1]
     password_iliad = query.data.split(":")[2]
-    msg, keyboard = commands.iliad_message_creation(id_iliad, password_iliad)
+    try:
+        info = query.data.split(":")[3]
+    except IndexError:
+        info = 'italia'
+    msg, keyboard = commands.iliad_message_creation(id_iliad, password_iliad, info)
     try:
         query.edit_message_text(text=msg, reply_markup=keyboard, parse_mode='HTML')
     except TelegramError as e:
