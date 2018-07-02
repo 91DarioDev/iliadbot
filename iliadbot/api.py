@@ -31,6 +31,7 @@ dic["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div[1]/div
 dic["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[2]/div/div[1]"
 dic["{} consumo totale".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[2]"
 dic["{} credito residuo".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[4]"
+dic["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]"
 
 errors = {
     'credentials': '//*[@id="page-container"]/div/div[1]/div/text()'
