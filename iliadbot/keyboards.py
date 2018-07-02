@@ -22,6 +22,7 @@ def update_iliad_data_kb(iliad_id, iliad_password, info):
     buttons = {
         'italia': '{} Soglie Italia'.format(emoji.italy),
         'estero': '{} Soglie Estero'.format(emoji.earth),
+        'info_sim': '{} Info sim'.format(emoji.info)
     }
     buttons_list = []
     for i in buttons:

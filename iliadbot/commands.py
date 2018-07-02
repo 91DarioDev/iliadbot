@@ -18,14 +18,21 @@
 import html
 from iliadbot import api
 from iliadbot import keyboards
+from iliadbot import emoji
 
 
-def iliad_message_creation(iliad_id, iliad_password, which_dict='estero'):
+def iliad_message_creation(iliad_id, iliad_password, which_dict='info_sim'):
     info = api.get_info(api.login(iliad_id, iliad_password), which_dict)
+
+    intro = {
+        'italia': 'Le tue soglie in Italia {}'.format(emoji.italy),
+        'estero': 'Le tue soglie all\'estero {}'.format(emoji.earth),
+        'info_sim': 'Info sulla tua sim {}'.format(emoji.info)
+    }
 
     msg = ""
     if info['error'] is False:
-        msg += "<b>Le tue soglie e credito iliad:</b>"
+        msg += "<b>{}: </b>".format(intro[which_dict])
         if len(info['ok']) == 0:  # iliad retuned nothing
             msg += "\nNon c'è nulla da mostrare"
         else:

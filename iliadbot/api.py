@@ -82,8 +82,9 @@ def get_info(tree, which_dic):
         dic = dic_italia
     elif which_dic == 'estero':
         dic = dic_estero
+    else:
+        dic = dic_general_info
 
-    dic.update(dic_general_info)  # add general info to the chosen dict
     for k, v in dic.items():
         res = tree.xpath(v)
         if res:
