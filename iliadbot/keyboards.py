@@ -14,16 +14,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with iliadbot.  If not, see <http://www.gnu.org/licenses/>.
 
+
+import collections
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from iliadbot import emoji
 
 
 def update_iliad_data_kb(iliad_id, iliad_password, info):
-    buttons = {
-        'italia': '{} Soglie Italia'.format(emoji.italy),
-        'estero': '{} Soglie Estero'.format(emoji.earth),
-        'info_sim': '{} Info sim'.format(emoji.info)
-    }
+    buttons = collections.OrderedDict()
+    buttons['italia'] = '{} Soglie Italia'.format(emoji.italy),
+    buttons['estero'] = '{} Soglie Estero'.format(emoji.earth),
+    buttons['info_sim'] = '{} Info sim'.format(emoji.info)
+
     buttons_list = []
     for i in buttons:
         buttons_list.append([
