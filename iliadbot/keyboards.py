@@ -22,8 +22,8 @@ from iliadbot import emoji
 
 def update_iliad_data_kb(iliad_id, iliad_password, info):
     buttons = collections.OrderedDict()
-    buttons['italia'] = '{} Soglie Italia'.format(emoji.italy),
-    buttons['estero'] = '{} Soglie Estero'.format(emoji.earth),
+    buttons['italia'] = '{} Soglie Italia'.format(emoji.italy)
+    buttons['estero'] = '{} Soglie Estero'.format(emoji.earth)
     buttons['info_sim'] = '{} Info sim'.format(emoji.info)
 
     buttons_list = []
