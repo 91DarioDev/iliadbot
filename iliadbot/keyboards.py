@@ -28,9 +28,24 @@ def update_iliad_data_kb(iliad_id, iliad_password, info):
 
     buttons_list = []
     for i in buttons:
+
+        if i == info:
+            pre_current_choice = "{} ".format(emoji.current_choice)
+            update_text =  "(Aggiorna {})".format(emoji.re_load)
+            post_current_choice = " {}".format(emoji.current_choice)
+        else:
+            pre_current_choice = ""
+            update_text =  ""
+            post_current_choice = "" 
+
         buttons_list.append([
             InlineKeyboardButton(
-                text=buttons[i],
+                text="{pre_current_choice}{button_text} {aggiorna}{post_current_choice}".format(
+                    pre_current_choice=pre_current_choice,
+                    button_text=buttons[i], 
+                    aggiorna=update_text,
+                    post_current_choice=post_current_choice
+                ),
                 callback_data="update_iliad:{}:{}:{}".format(iliad_id, iliad_password, i)
             )
         ])
