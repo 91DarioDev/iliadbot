@@ -18,15 +18,16 @@
 from iliadbot import emoji
 
 def adjust_parsed_info(dic):
-	for i in dic:
+    for i in dic:
 
-		if i[0] == "{} numero".format(emoji.user):
-			i[1] = i[1].split(": ")[1]
+        if i[0] == "{} numero".format(emoji.user):
+            i[1] = i[1].split(": ")[1]
 
-		elif i[0] == "{} id utente".format(emoji.user):
-			i[1] = i[1].split(": ")[1]
+        elif i[0] == "{} id utente".format(emoji.user):
+            i[1] = i[1].split(": ")[1]
 
-		elif i[0] == "{} rinnovo".format(emoji.renewal):
-			i[1] = i[1].split("alle ")[1]
-	
-	return dic
+        elif i[0] == "{} rinnovo".format(emoji.renewal):
+            i[1] = i[1].split("alle ")[1]
+    
+    return dic
+    

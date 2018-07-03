@@ -51,13 +51,13 @@ def run_query(query, *params, read=False, one=False):
 
 def create_db():
     query = """
-    	CREATE TABLE 
-    	IF NOT EXISTS 
-    	users (
-    		user_id INTEGER PRIMARY KEY, 
-    		last_activity TIMESTAMP,
-    		registered_at TIMESTAMP
-    	)
+        CREATE TABLE 
+        IF NOT EXISTS 
+        users (
+            user_id INTEGER PRIMARY KEY, 
+            last_activity TIMESTAMP,
+            registered_at TIMESTAMP
+        )
     """
     run_query(query)
 
