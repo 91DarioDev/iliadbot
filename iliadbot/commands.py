@@ -38,7 +38,7 @@ def iliad_message_creation(iliad_id, iliad_password, which_dict='info_sim'):
             msg += "\nNon c'è nulla da mostrare"
         else:
             for i in utils.adjust_parsed_info(info['ok']):
-                msg += "\n — {}: {}".format(html.escape(i[0]), html.escape(i[1]))
+                msg += "\n{}{}: {}".format(emoji.current_choice, html.escape(i[0]), html.escape(i[1]))
         keyboard = keyboards.update_iliad_data_kb(iliad_id, iliad_password, which_dict)
     else:  # invalid credentials
         msg += "<b>ERRORE:</b> {}".format(html.escape(info['error']))
