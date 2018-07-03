@@ -19,6 +19,7 @@ import html
 from iliadbot import api
 from iliadbot import keyboards
 from iliadbot import emoji
+from iliadbot import utils
 
 
 def iliad_message_creation(iliad_id, iliad_password, which_dict='info_sim'):
@@ -36,7 +37,7 @@ def iliad_message_creation(iliad_id, iliad_password, which_dict='info_sim'):
         if len(info['ok']) == 0:  # iliad retuned nothing
             msg += "\nNon c'è nulla da mostrare"
         else:
-            for i in info['ok']:
+            for i in utils.adjust_parsed_info(info['ok']):
                 msg += "\n — {}: {}".format(html.escape(i[0]), html.escape(i[1]))
         keyboard = keyboards.update_iliad_data_kb(iliad_id, iliad_password, which_dict)
     else:  # invalid credentials

@@ -40,6 +40,9 @@ dic_estero["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div[1]/div/di
 
 # info sim xpaths
 dic_general_info = collections.OrderedDict()
+dic_general_info["{} utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div[1]/div/nav/div/div[2]/div[1]"
+dic_general_info["{} id utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div[1]/div/nav/div/div[2]/div[2]"
+dic_general_info["{} numero".format(emoji.user)] = "/html/body/div[1]/div[2]/div[1]/div/nav/div/div[2]/div[3]"
 dic_general_info["{} consumo totale".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[2]"
 dic_general_info["{} credito residuo".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[4]"
 dic_general_info["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]"
