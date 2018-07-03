@@ -28,6 +28,8 @@ def adjust_parsed_info(dic):
 
         elif i[0] == "{} rinnovo".format(emoji.renewal):
             i[1] = i[1].split("alle ")[1]
+
+        elif i[0] == "{} chiamate".format(emoji.telephone):
+            i[1] = " ".join(i[1].split(": ")[1:])  # remove double "chiamate"
     
     return dic
-    
