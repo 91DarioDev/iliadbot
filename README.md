@@ -4,7 +4,8 @@ iliadbot è un bot telegram che permette di conoscere soglie e credito della tua
 
 Potresti non fidarti che non salviamo le tue credenziali e voler eseguire una tua istanza del bot. Di seguito le istruzioni per farlo.
 <p align="center">
-<img src="../master/resources/screenshots/example.jpg" width="250">
+<img src="../master/resources/screenshots/example_soglie_italia.jpg" width="250">
+<img src="../master/resources/screenshots/example_info_sim.jpg" width="250">
 </p>
 
 ## Run this bot by yourself:
