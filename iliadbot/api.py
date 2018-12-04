@@ -46,12 +46,6 @@ dic_general_info["{} numero".format(emoji.user)] = "/html/body/div[1]/div[2]/div
 dic_general_info["{} credito".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/h2/b"
 dic_general_info["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]"
 
-
-# error xpaths
-errors = {
-    'credentials': '//*[@id="page-container"]/div/div[1]/div/text()'
-}
-
 def login(id, pwd):
     """
     params: id, pwd
@@ -61,6 +55,10 @@ def login(id, pwd):
 
     r = requests.post(url, data=data)
     tree = html.fromstring(r.content)
+    
+    # Return False if wrong credentials
+    if "ID utente o password non corretto." in tree.xpath("//*[@id="page-container"]/div/div[1]/div/text()"):
+        return False
 
     return tree
 
@@ -71,13 +69,7 @@ def get_info(tree, which_dic):
     params: TreeObject
     return: dic
     """
-    info = {'ok':[], 'error':False}
-
-    for err_name, xpath in errors.items():
-        error = tree.xpath(xpath)
-        if error:
-            info['error'] = err_name
-            return info
+    info = []
 
     # which_dic to take
     if which_dic == 'italia':
@@ -94,5 +86,5 @@ def get_info(tree, which_dic):
             res_child_text_no_spaces = re.sub(' +',' ', res_child_text)  # remove multiple spaces
             res_child_text_no_spaces = re.sub(' \n',' ', res_child_text_no_spaces)  # remove multiple new lines
             res_child_text_no_spaces = re.sub(' \t',' ', res_child_text_no_spaces) # remove multiple tabs
-            info['ok'].append([k, res_child_text_no_spaces])
+            info.append([k, res_child_text_no_spaces])
     return info
