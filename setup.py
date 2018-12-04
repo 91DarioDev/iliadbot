@@ -29,7 +29,7 @@ setuptools.setup(
     author="iliadbot authors",
 
     install_requires=[
-        "requests==2.7.0",
+        "requests",
         "lxml==4.2.1",
         "python-telegram-bot",
         "pyyaml"
