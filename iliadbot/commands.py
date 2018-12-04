@@ -23,7 +23,8 @@ from iliadbot import utils
 
 
 def iliad_message_creation(iliad_id, iliad_password, which_dict='info_sim'):
-    login = api.login(iliad_id, iliad_password)
+    info = api.get_info(api.login(iliad_id, iliad_password), which_dict)
+
     intro = {
         'italia': 'Le tue soglie in Italia {}'.format(emoji.italy),
         'estero': 'Le tue soglie all\'estero {}'.format(emoji.earth),
@@ -31,17 +32,16 @@ def iliad_message_creation(iliad_id, iliad_password, which_dict='info_sim'):
     }
 
     msg = ""
-    if login:
-        info = api.get_info(login, which_dict)
+    if info['error'] is False:
         msg += "<b>{}: </b>".format(intro[which_dict])
-        if len(info) == 0:  # iliad retuned nothing
+        if len(info['ok']) == 0:  # iliad retuned nothing
             msg += "\nNon c'è nulla da mostrare"
         else:
-            for i in utils.adjust_parsed_info(info):
+            for i in utils.adjust_parsed_info(info['ok']):
                 msg += "\n{}{}: {}".format(emoji.current_choice, html.escape(i[0]), html.escape(i[1]))
         keyboard = keyboards.update_iliad_data_kb(iliad_id, iliad_password, which_dict)
     else:  # invalid credentials
-        msg += "<b>ERRORE:</b> {}".format(html.escape("ID utente o password non corretto."))
+        msg += "<b>ERRORE:</b> {}".format(html.escape(info['error']))
         keyboard = None
     return msg, keyboard
 
