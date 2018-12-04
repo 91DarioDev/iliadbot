@@ -33,19 +33,21 @@ dic_italia["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div[1]/div/di
 
 # estero xpaths
 dic_estero = collections.OrderedDict()
-dic_estero["{} chiamate".format(emoji.telephone)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[1]/div[1]/div/div[1]"
-dic_estero["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[1]/div[2]/div/div[1]"
-dic_estero["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div[1]"
-dic_estero["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div[1]"
+dic_estero["{} chiamate".format(emoji.telephone)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[1]/div[1]/div/div[1]/span[1]"
+dic_estero["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[1]/div[2]/div/div[1]/span[1]"
+dic_estero["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div[1]/span[1]"
+dic_estero["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div[1]/span[1]"
+
 
 # info sim xpaths
 dic_general_info = collections.OrderedDict()
-dic_general_info["{} utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div[1]/div/nav/div/div[2]/div[1]"
-dic_general_info["{} id utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div[1]/div/nav/div/div[2]/div[2]"
-dic_general_info["{} numero".format(emoji.user)] = "/html/body/div[1]/div[2]/div[1]/div/nav/div/div[2]/div[3]"
+dic_general_info["{} utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div/div/div/div/nav/div/div[2]/div[1]"
+dic_general_info["{} id utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div/div/div/div/nav/div/div[2]/div[2]"
+dic_general_info["{} numero".format(emoji.user)] = "/html/body/div[1]/div[2]/div/div/div/div/nav/div/div[2]/div[3]"
 #dic_general_info["{} consumo totale".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[2]"   #removed from website
-dic_general_info["{} credito".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/h2/b"
-dic_general_info["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[1]"
+dic_general_info["{} credito".format(emoji.money)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/h2/b"
+dic_general_info["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[1]"
+
 
 
 # error xpaths
@@ -62,6 +64,10 @@ def login(id, pwd):
 
     r = requests.post(url, data=data)
     tree = html.fromstring(r.content)
+
+    # Return False if wrong credentials
+    if "ID utente o password non corretto." in tree.xpath('//*[@id="page-container"]/div/div[1]/div/text()'):
+        return False
 
     return tree
 
