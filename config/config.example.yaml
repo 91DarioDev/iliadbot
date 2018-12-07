@@ -1,0 +1,25 @@
+# iliadbot - A telegram bot to check your iliad's balance and quotas
+# Copyright (C) 2018  iliadbot authors: see AUTHORS file at the top-level directory of this repo
+#
+# iliadbot is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# iliadbot is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with iliadbot.  If not, see <http://www.gnu.org/licenses/>.
+
+# before of running the bot you should create a file named `config.yaml`
+# the file should be the same of this one, but replacing sample variables with true data
+
+
+# the token of the bot you get from t.me/botfather (type: str)
+bot_token: "token"
+
+# the path where the database will be saved
+db_path: "/home/iliadbot/database/database.db"
