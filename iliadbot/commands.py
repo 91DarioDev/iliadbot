@@ -33,7 +33,6 @@ def iliad_message_creation(iliad_id, iliad_password, which_dict='info_sim'):
     msg = ""
     if login is not None:
         info = api.get_info(login, which_dict)
-        print(info)
         msg += "<b>{}: </b>".format(intro[which_dict])
         if len(info) == 0:  # iliad retuned nothing
             msg += "\nNon c'è nulla da mostrare"
