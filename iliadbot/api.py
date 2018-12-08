@@ -70,13 +70,7 @@ def get_info(tree, which_dic):
     params: TreeObject
     return: dic
     """
-    info = {'ok':[], 'error':False}
-
-    for err_name, xpath in errors.items():
-        error = tree.xpath(xpath)
-        if error:
-            info['error'] = err_name
-            return info
+    info = []
 
     # which_dic to take
     if which_dic == 'italia':
@@ -93,5 +87,5 @@ def get_info(tree, which_dic):
             res_child_text_no_spaces = re.sub(' +',' ', res_child_text)  # remove multiple spaces
             res_child_text_no_spaces = re.sub(' \n',' ', res_child_text_no_spaces)  # remove multiple new lines
             res_child_text_no_spaces = re.sub(' \t',' ', res_child_text_no_spaces) # remove multiple tabs
-            info['ok'].append([k, res_child_text_no_spaces])
+            info.append([k, res_child_text_no_spaces])
     return info
