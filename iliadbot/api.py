@@ -26,10 +26,10 @@ url = "https://www.iliad.it/account/"
 
 # italia xpaths
 dic_italia = collections.OrderedDict()
-dic_italia["{} chiamate".format(emoji.telephone)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[1]/div/div[1]"
-dic_italia["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div[1]"
-dic_italia["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[1]"
-dic_italia["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[2]/div/div[1]"
+dic_italia["{} chiamate".format(emoji.telephone)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[2]/div[1]/div[1]/div/div[1]/span[1]"
+dic_italia["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[2]/div[1]/div[2]/div/div[1]/span[1]"
+dic_italia["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[1]/span[1]"
+dic_italia["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[2]/div[2]/div[2]/div/div[1]/span[1]"
 
 # estero xpaths
 dic_estero = collections.OrderedDict()
@@ -38,8 +38,6 @@ dic_estero["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div/div/div/d
 dic_estero["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div[1]/span[1]"
 dic_estero["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div[1]/span[1]"
 
-
-# info sim xpaths
 dic_general_info = collections.OrderedDict()
 dic_general_info["{} utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div/div/div/div/nav/div/div[2]/div[1]"
 dic_general_info["{} id utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div/div/div/div/nav/div/div[2]/div[2]"
@@ -48,12 +46,6 @@ dic_general_info["{} numero".format(emoji.user)] = "/html/body/div[1]/div[2]/div
 dic_general_info["{} credito".format(emoji.money)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/h2/b"
 dic_general_info["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[1]"
 
-
-
-# error xpaths
-errors = {
-    'credentials': '//*[@id="page-container"]/div/div[1]/div/text()'
-}
 
 def login(id, pwd):
     """
