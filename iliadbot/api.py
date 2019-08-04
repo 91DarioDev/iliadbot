@@ -44,7 +44,7 @@ dic_general_info["{} id utente".format(emoji.user)] = "/html/body/div[1]/div[2]/
 dic_general_info["{} numero".format(emoji.user)] = "/html/body/div[1]/div[2]/div/div/div/div/nav/div/div[2]/div[3]"
 #dic_general_info["{} consumo totale".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[2]"   #removed from website
 dic_general_info["{} credito".format(emoji.money)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/h2/b"
-dic_general_info["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[1]"
+dic_general_info["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[2]"
 
 
 def login(id, pwd):
