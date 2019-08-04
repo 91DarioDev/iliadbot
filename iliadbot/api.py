@@ -58,7 +58,7 @@ def login(id, pwd):
     tree = html.fromstring(r.content)
 
     # Return False if wrong credentials
-    if "ID utente o password non corretto." in " ".join(tree.xpath('/html/body/div[1]/div[2]/div/div[1]/div/text()')):
+    if "ID utente o password non corretto." in tree.xpath('/html/body/div[1]/div[2]/div/div[1]/div/text()').join(" "):
         return False
 
     return tree
