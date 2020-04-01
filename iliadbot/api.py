@@ -90,7 +90,4 @@ def get_info(tree, which_dic):
     else:
         dic = get_general(tree)
 
-    for k, v in dic.items():
-        print(k, v)
-
     return dic
