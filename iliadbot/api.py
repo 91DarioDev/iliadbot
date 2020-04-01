@@ -25,27 +25,32 @@ from iliadbot import emoji
 url = "https://www.iliad.it/account/"
 
 # italia xpaths
-dic_italia = collections.OrderedDict()
-dic_italia["{} chiamate".format(emoji.telephone)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[1]/div[1]/div/div[1]"
-dic_italia["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[1]/div[2]/div/div[1]"
-dic_italia["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div[1]"
-dic_italia["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div[1]"
+def get_italia(tree):
+    dic_italia = collections.OrderedDict()
+    dic_italia["{} chiamate".format(emoji.telephone)] = tree.xpath('//div[@class="conso-infos conso-local"]//div[@class="conso__text"]/span[2]/text()')[0]
+    dic_italia["{} sms".format(emoji.sms)] = tree.xpath('//div[@class="conso-infos conso-local"]//div[@class="conso__text"]/span[2]/text()')[1]
+    dic_italia["{} internet".format(emoji.internet)] = tree.xpath('//div[@class="conso-infos conso-local"]//div[@class="conso__text"]/span[2]/text()')[2]
+    dic_italia["{} mms".format(emoji.mms)] =tree.xpath('//div[@class="conso-infos conso-local"]//div[@class="conso__text"]/span[2]/text()')[3]
+    return dic_italia
 
 # estero xpaths
-dic_estero = collections.OrderedDict()
-dic_estero["{} chiamate".format(emoji.telephone)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[4]/div[1]/div[1]/div/div[1]"
-dic_estero["{} sms".format(emoji.sms)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[4]/div[1]/div[2]/div/div[1]"
-dic_estero["{} internet".format(emoji.internet)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[4]/div[2]/div[1]/div/div[1]"
-dic_estero["{} mms".format(emoji.mms)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[4]/div[2]/div[2]/div/div[1]"
+def get_estero(tree):
+    dic_estero = collections.OrderedDict()
+    dic_estero["{} chiamate".format(emoji.telephone)] = tree.xpath('//div[@class="conso-infos conso-roaming"]//div[@class="conso__text"]/span[2]/text()')[0]
+    dic_estero["{} sms".format(emoji.sms)] = tree.xpath('//div[@class="conso-infos conso-roaming"]//div[@class="conso__text"]/span[2]/text()')[1]
+    dic_estero["{} internet".format(emoji.internet)] = tree.xpath('//div[@class="conso-infos conso-roaming"]//div[@class="conso__text"]/span[2]/text()')[2]
+    dic_estero["{} mms".format(emoji.mms)] =tree.xpath('//div[@class="conso-infos conso-roaming"]//div[@class="conso__text"]/span[2]/text()')[3]
+    return dic_estero
 
-dic_general_info = collections.OrderedDict()
-dic_general_info["{} utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div/nav/div/div/div[2]/div[1]"
-dic_general_info["{} id utente".format(emoji.user)] = "/html/body/div[1]/div[2]/div/nav/div/div/div[2]/div[2]"
-dic_general_info["{} numero".format(emoji.user)] = "/html/body/div[1]/div[2]/div/nav/div/div/div[2]/div[3]"
-#dic_general_info["{} consumo totale".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[2]"   #removed from website
-dic_general_info["{} credito".format(emoji.money)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/h2/b"
-dic_general_info["{} rinnovo".format(emoji.renewal)] = "/html/body/div[1]/div[2]/div/div/div/div/div[2]/div[2]/div[2]"
-
+def get_general(tree):
+    dic_general_info = collections.OrderedDict()
+    dic_general_info["{} utente".format(emoji.user)] =  tree.xpath('//div[@class="current-user__infos"]/div[1]/text()')[0]
+    dic_general_info["{} id utente".format(emoji.user)] = tree.xpath('//div[@class="current-user__infos"]/div[2]/text()')[0]
+    dic_general_info["{} numero".format(emoji.user)] = tree.xpath('//div[@class="current-user__infos"]/div[3]/text()')[0]
+    #dic_general_info["{} consumo totale".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[2]"   #removed from website
+    dic_general_info["{} credito".format(emoji.money)] = tree.xpath('//div[@class="page p-conso"]/h2/b/text()')
+    dic_general_info["{} rinnovo".format(emoji.renewal)] = tree.xpath('//div[@class="end_offerta"]/text()')[0].replace("\n", "").replace("    ", "")
+    return dic_general_info
 
 def login(id, pwd):
     """
@@ -55,10 +60,15 @@ def login(id, pwd):
     data = {"login-ident":id, "login-pwd":pwd}
 
     r = requests.post(url, data=data)
+    with open("c.html", "a") as e:
+        e.write(r.text)
     tree = html.fromstring(r.content)
 
+    error = tree.xpath('//div[@class="flash flash-error"]/text()')
+
     # Return False if wrong credentials
-    if "ID utente o password non corretto." in tree.xpath('/html/body/div[1]/div[2]/div/div[1]/div/text()'):
+    if error:
+        print("Errore nelle credenziali")
         return False
 
     return tree
@@ -74,18 +84,13 @@ def get_info(tree, which_dic):
 
     # which_dic to take
     if which_dic == 'italia':
-        dic = dic_italia
+        dic = get_italia(tree)
     elif which_dic == 'estero':
-        dic = dic_estero
+        dic = get_estero(tree)
     else:
-        dic = dic_general_info
+        dic = get_general(tree)
 
     for k, v in dic.items():
-        res = tree.xpath(v)
-        if res:
-            res_child_text = res[0].text_content()
-            res_child_text_no_spaces = re.sub(' +',' ', res_child_text)  # remove multiple spaces
-            res_child_text_no_spaces = re.sub(' \n',' ', res_child_text_no_spaces)  # remove multiple new lines
-            res_child_text_no_spaces = re.sub(' \t',' ', res_child_text_no_spaces) # remove multiple tabs
-            info.append([k, res_child_text_no_spaces])
-    return info
+        print(k, v)
+
+    return dic
