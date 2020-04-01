@@ -66,8 +66,7 @@ def login(id, pwd):
 
     # Return False if wrong credentials
     if error:
-        print("Errore nelle credenziali")
-        return False
+        return None
 
     return tree
 
