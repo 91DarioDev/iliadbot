@@ -60,8 +60,6 @@ def login(id, pwd):
     data = {"login-ident":id, "login-pwd":pwd}
 
     r = requests.post(url, data=data)
-    with open("c.html", "a") as e:
-        e.write(r.text)
     tree = html.fromstring(r.content)
 
     error = tree.xpath('//div[@class="flash flash-error"]/text()')
