@@ -48,7 +48,7 @@ def get_general(tree):
     dic_general_info["{} id utente".format(emoji.user)] = tree.xpath('//div[@class="current-user__infos"]/div[2]/text()')[0]
     dic_general_info["{} numero".format(emoji.user)] = tree.xpath('//div[@class="current-user__infos"]/div[3]/text()')[0]
     #dic_general_info["{} consumo totale".format(emoji.money)] = "/html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[6]/div[2]"   #removed from website
-    dic_general_info["{} credito".format(emoji.money)] = tree.xpath('//div[@class="page p-conso"]/h2/b/text()')
+    dic_general_info["{} credito".format(emoji.money)] = tree.xpath('//div[@class="page p-conso"]/h2/b/text()')[0]
     dic_general_info["{} rinnovo".format(emoji.renewal)] = tree.xpath('//div[@class="end_offerta"]/text()')[0].replace("\n", "").replace("    ", "")
     return dic_general_info
 
