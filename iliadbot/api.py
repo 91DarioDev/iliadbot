@@ -78,7 +78,6 @@ def get_info(tree, which_dic):
     params: TreeObject
     return: dic
     """
-    info = []
 
     # which_dic to take
     if which_dic == 'italia':
