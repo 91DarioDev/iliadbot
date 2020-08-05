@@ -28,7 +28,7 @@ url = "https://www.iliad.it/account/"
 def get_italia(tree):
     dic_italia = collections.OrderedDict()
     dic_italia["{} chiamate".format(emoji.telephone)] = tree.xpath('/html/body/div[1]/div[1]/div/div/div/div/div[2]/div[2]/div[3]/div[1]/div[1]/div/div[1]/span[1]/text()')
-    dic_italia["{} sms".format(emoji.sms)] = "1"# tree.xpath('/html/body/div[1]/div[1]/div/div/div/div/div[2]/div[2]/div[3]/div[1]/div[2]/div/div[1]/span[1]/text()')
+    dic_italia["{} sms".format(emoji.sms)] = tree.xpath('/html/body/div[1]/div[1]/div/div/div/div/div[2]/div[2]/div[3]/div[1]/div[2]/div/div[1]/span[1]/text()')
     dic_italia["{} internet".format(emoji.internet)] = tree.xpath('/html/body/div[1]/div[1]/div/div/div/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div[1]/text()')
     dic_italia["{} mms".format(emoji.mms)] =tree.xpath('/html/body/div[1]/div[1]/div/div/div/div/div[2]/div[2]/div[3]/div[2]/div[2]/div/div[1]/span[1]/text()')
     return dic_italia
